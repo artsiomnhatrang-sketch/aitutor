@@ -685,6 +685,25 @@
       flex-shrink: 0;
       margin-top: 5px;
     }
+    .service-card-btns {
+      display: flex;
+      gap: 8px;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    a.svc-btn {
+      color: var(--orange);
+      border: 1.5px solid var(--orange);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      transition: background .2s, color .2s;
+      white-space: nowrap;
+    }
+    a.svc-btn:hover { background: var(--orange); color: #fff; }
     /* Price tag inside service card */
     .service-price {
       display: flex;
@@ -1295,6 +1314,15 @@
       }
     });
   }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card').forEach(card => {
+    const btns = document.createElement('div');
+    btns.className = 'service-card-btns';
+    btns.innerHTML =
+      '<a href="https://t.me/m/8mtf5rZ2N2Ni" class="svc-btn" target="_blank" rel="noopener">Telegram →</a>' +
+      '<a href="https://max.ru/u/f9LHodD0cOLCdCjDGiT5cFgHQVqkAa6KJVSwu9DA-JgUi6LO9If2oRS6La8" class="svc-btn" target="_blank" rel="noopener">MAX →</a>';
+    card.appendChild(btns);
+  });
 
   document.querySelectorAll('.service-card, .case-stat, .pkg-item').forEach(el => {
     el.style.opacity = '0';
