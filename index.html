@@ -66,6 +66,18 @@
       transition: opacity .2s;
     }
     nav a.nav-cta:hover { opacity: .85; }
+    nav a.nav-bonus {
+      color: var(--orange);
+      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 100px;
+      border: 1.5px solid var(--orange);
+      transition: background .2s, color .2s;
+    }
+    nav a.nav-bonus:hover { background: var(--orange); color: #fff; }
 
     /* ─── SHARED ─── */
     .container { max-width: 1120px; margin: 0 auto; padding: 0 40px; }
@@ -932,6 +944,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">А<span>.</span>Бахрамов</div>
+  <a href="https://t.me/bahramovartem_bot" class="nav-bonus" target="_blank" rel="noopener">🎁 Бонусы</a>
   <a href="https://t.me/m/8mtf5rZ2N2Ni" class="nav-cta" target="_blank" rel="noopener">Получить бесплатный аудит →</a>
 </nav>
 
