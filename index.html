@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AITutor — ИИ-ассистент для Mac</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Noto+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg2: #f5f4f0;
+    --text: #1a1a1a;
+    --text2: #6b6b6b;
+    --text3: #999;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+    --purple: #534AB7;
+    --purple-light: #EEEDFE;
+    --purple-dark: #3C3489;
+    --radius: 12px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a1a;
+      --bg2: #252525;
+      --text: #f0f0f0;
+      --text2: #aaa;
+      --text3: #666;
+      --border: rgba(255,255,255,0.1);
+      --border2: rgba(255,255,255,0.2);
+      --purple-light: #2a2660;
+    }
+  }
+
+  body {
+    font-family: 'Noto Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 1.25rem 5rem;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 4rem 0 2rem;
+    text-align: center;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 100px;
+    background: var(--purple-light);
+    color: var(--purple);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 span { color: var(--purple); }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--text2);
+    line-height: 1.75;
+    max-width: 460px;
+    margin: 0 auto 2.5rem;
+  }
+
+  /* MOCK */
+  .screen-mock {
+    max-width: 480px;
+    margin: 0 auto 1rem;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 0.5px solid var(--border);
+  }
+
+  .browser-bar {
+    background: var(--bg2);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .dot-r { background: #E24B4A; }
+  .dot-y { background: #EF9F27; }
+  .dot-g { background: #639922; }
+
+  .url-bar {
+    flex: 1;
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 11px;
+    color: var(--text3);
+    font-family: monospace;
+  }
+
+  .browser-body {
+    background: var(--bg);
+    padding: 1.25rem;
+    min-height: 160px;
+    position: relative;
+  }
+
+  .page-lines { padding-right: 155px; display: flex; flex-direction: column; gap: 7px; }
+  .pl { height: 9px; background: var(--bg2); border-radius: 4px; }
+
+  .floating-widget {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 138px;
+    background: var(--purple);
+    border-radius: 10px;
+    padding: 11px;
+  }
+
+  .fw-label {
+    font-size: 9px;
+    font-weight: 500;
+    color: #CECBF6;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  .fw-text {
+    font-size: 10px;
+    color: #EEEDFE;
+    line-height: 1.5;
+    margin-bottom: 9px;
+  }
+
+  .fw-btn {
+    display: block;
+    width: 100%;
+    background: #EEEDFE;
+    color: var(--purple-dark);
+    border: none;
+    border-radius: 5px;
+    padding: 5px 0;
+    font-size: 9px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  /* FEATURES */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px;
+    margin: 2.5rem 0;
+  }
+
+  .feat {
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+  }
+
+  .feat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feat h3 { font-size: 14px; font-weight: 500; margin-bottom: 5px; }
+  .feat p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+  /* DIVIDER */
+  .divider { height: 0.5px; background: var(--border); margin: 2rem 0; }
+
+  /* HOW */
+  .how h2, .cta-block h2 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+
+  .steps { display: flex; flex-direction: column; gap: 14px; margin-bottom: 2.5rem; }
+
+  .step { display: flex; gap: 14px; align-items: flex-start; }
+
+  .step-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--purple-light);
+    color: var(--purple);
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-text strong { display: block; font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+  .step-text span { font-size: 13px; color: var(--text2); }
+
+  /* CTA */
+  .cta-block {
+    background: var(--bg2);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    border: 0.5px solid var(--border);
+  }
+
+  .cta-block .sub {
+    font-size: 14px;
+    color: var(--text2);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .tg-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--purple);
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Noto Sans', sans-serif;
+    transition: background 0.15s, transform 0.1s;
+  }
+
+  .tg-btn:hover { background: var(--purple-dark); }
+  .tg-btn:active { transform: scale(0.98); }
+
+  .tg-icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .note {
+    font-size: 12px;
+    color: var(--text3);
+    margin-top: 14px;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text3);
+    padding-top: 3rem;
+  }
+
+  /* MOBILE */
+  @media (max-width: 480px) {
+    .hero { padding: 2.5rem 0 1.5rem; }
+    .features { grid-template-columns: 1fr; }
+    .cta-block { padding: 1.5rem 1rem; }
+    .tg-btn { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="badge">ИИ-ассистент для Mac</div>
+    <h1>Твой личный ИИ<br><span>всегда поверх экрана</span></h1>
+    <p>AITutor висит поверх браузера и отвечает на любые вопросы — не переключаясь между вкладками. Просто спроси.</p>
+
+    <div class="screen-mock">
+      <div class="browser-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <div class="url-bar">youtube.com/watch?v=...</div>
+      </div>
+      <div class="browser-body">
+        <div class="page-lines">
+          <div class="pl" style="width:65%"></div>
+          <div class="pl" style="width:90%"></div>
+          <div class="pl" style="width:78%"></div>
+          <div class="pl" style="width:55%"></div>
+          <div class="pl" style="width:83%"></div>
+          <div class="pl" style="width:47%"></div>
+        </div>
+        <div class="floating-widget">
+          <div class="fw-label">AITutor</div>
+          <div class="fw-text">Объясни что происходит на экране</div>
+          <div class="fw-btn">Анализировать ↗</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feat">
+      <div class="feat-icon" style="background:#EEEDFE;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#534AB7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <h3>Видит твой экран</h3>
+      <p>Делает скриншот и объясняет что происходит — в браузере, документе, любом приложении</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon" style="background:#E1F5EE;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <h3>Отвечает мгновенно</h3>
+      <p>Задай вопрос текстом — ответ за секунды. Не нужно переходить на другие сайты</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon" style="background:#FAECE7;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#993C1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3>Всегда поверх</h3>
+      <p>Окно не прячется за браузером. Работает в обычном и полноэкранном режиме</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="how">
+    <h2>Как это работает</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <strong>Открываешь браузер или любое приложение</strong>
+          <span>AITutor висит поверх — маленькое окошко в углу экрана</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <strong>Нажимаешь «Анализировать экран»</strong>
+          <span>ИИ видит всё что у тебя на экране прямо сейчас</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <strong>Задаёшь вопрос и получаешь ответ</strong>
+          <span>Быстро и по делу — на русском языке</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="cta-block">
+    <h2>Хочу попробовать</h2>
+    <p class="sub">Нажми кнопку — откроется Telegram.<br>Напишем когда будет доступ к демо.</p>
+    <a class="tg-btn" href="https://t.me/m/8mtf5rZ2N2Ni" target="_blank">
+      <svg class="tg-icon" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.026 9.54c-.148.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.332-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.889.681z"/>
+      </svg>
+      Записаться на демо
+    </a>
+    <p class="note">Только для Mac · Бесплатное демо</p>
+  </div>
+
+  <footer>
+    <p>© 2026 AITutor · Сделано с ❤️</p>
+  </footer>
+
+</div>
+</body>
+</html>
