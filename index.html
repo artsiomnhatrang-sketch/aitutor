@@ -132,74 +132,57 @@
     #hero {
       position: relative;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #0f0f0f;
+      background: #0a0a0a;
       overflow: hidden;
-      padding: 0;
     }
 
-    /* Side photos — full height */
+    /* Side photos */
     .hero-bg-left,
     .hero-bg-right {
       position: absolute;
-      top: 0; bottom: 0;
-      width: 35%;
-      height: 100%;
+      bottom: 0;
+      height: 90%;
+      width: 38%;
       object-fit: cover;
+      object-position: center top;
       pointer-events: none;
       display: block;
     }
     .hero-bg-left {
       left: 0;
-      object-position: center top;
-      -webkit-mask-image: linear-gradient(to right, black 40%, transparent 100%);
-      mask-image: linear-gradient(to right, black 40%, transparent 100%);
+      -webkit-mask-image:
+        linear-gradient(to right, rgba(0,0,0,0.9) 40%, transparent 100%),
+        linear-gradient(to top, transparent 0%, black 15%);
+      mask-image:
+        linear-gradient(to right, rgba(0,0,0,0.9) 40%, transparent 100%),
+        linear-gradient(to top, transparent 0%, black 15%);
+      -webkit-mask-composite: destination-in;
+      mask-composite: intersect;
     }
     .hero-bg-right {
       right: 0;
-      object-position: center top;
-      transform: scaleX(-1);
-      opacity: 0.55;
-      -webkit-mask-image: linear-gradient(to left, black 40%, transparent 100%);
-      mask-image: linear-gradient(to left, black 40%, transparent 100%);
+      -webkit-mask-image:
+        linear-gradient(to left, rgba(0,0,0,0.9) 40%, transparent 100%),
+        linear-gradient(to top, transparent 0%, black 15%);
+      mask-image:
+        linear-gradient(to left, rgba(0,0,0,0.9) 40%, transparent 100%),
+        linear-gradient(to top, transparent 0%, black 15%);
+      -webkit-mask-composite: destination-in;
+      mask-composite: intersect;
     }
 
-    /* Center dark vignette for legibility */
-    #hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 55% 90% at 50% 50%, rgba(15,15,15,0.85) 0%, transparent 100%),
-        linear-gradient(to bottom, rgba(15,15,15,0.5) 0%, transparent 30%, transparent 70%, rgba(15,15,15,0.7) 100%);
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    /* Orange ground glow */
-    #hero::after {
-      content: '';
-      position: absolute;
-      bottom: -60px; left: 50%;
-      transform: translateX(-50%);
-      width: 700px; height: 300px;
-      background: radial-gradient(ellipse, rgba(244,103,42,0.22) 0%, transparent 70%);
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    /* Center content */
+    /* Center content — absolutely positioned */
     .hero-content {
-      position: relative;
-      z-index: 2;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 44%;
       text-align: center;
-      max-width: 680px;
-      padding: 130px 40px 90px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      z-index: 2;
     }
 
     .hero-eyebrow {
@@ -209,13 +192,13 @@
       background: var(--orange-dim);
       border: 1px solid var(--orange-border);
       border-radius: 100px;
-      padding: 6px 18px;
+      padding: 5px 16px;
       font-family: 'Inter', sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 500;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.07em;
       color: var(--orange);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .hero-eyebrow .dot {
       width: 6px; height: 6px;
@@ -226,97 +209,84 @@
     }
     @keyframes pulse {
       0%,100% { opacity:1; transform:scale(1); }
-      50% { opacity:.4; transform:scale(1.5); }
+      50% { opacity:.35; transform:scale(1.6); }
     }
 
     .hero-name {
       font-family: 'Inter', sans-serif;
-      font-size: clamp(13px, 1.2vw, 15px);
-      font-weight: 500;
+      font-size: 11px;
+      font-weight: 600;
       color: var(--muted);
-      letter-spacing: 0.25em;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .hero-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(4rem, 8vw, 7rem);
+      font-size: clamp(3rem, 5vw, 4.5rem);
       font-weight: 400;
-      line-height: 0.95;
+      line-height: 1;
       color: #fff;
       text-transform: uppercase;
-      letter-spacing: 0.02em;
-      margin-bottom: 28px;
-      text-shadow: 0 4px 60px rgba(0,0,0,0.7);
+      letter-spacing: 0.03em;
+      margin-bottom: 20px;
     }
     .hero-title .accent { color: var(--orange); }
 
     .hero-subtitle {
       font-family: 'Inter', sans-serif;
       font-size: 16px;
-      color: rgba(232,232,232,0.65);
-      line-height: 1.7;
-      margin-bottom: 32px;
-      max-width: 500px;
-    }
-
-    .hero-bullets {
-      list-style: none;
-      margin-bottom: 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      text-align: left;
-      align-self: stretch;
-      max-width: 460px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .hero-bullets li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-family: 'Inter', sans-serif;
-      font-size: 14.5px;
-      color: rgba(232,232,232,0.85);
-      line-height: 1.5;
-    }
-    .hero-bullets li::before {
-      content: '→';
-      color: var(--orange);
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 1px;
+      color: rgba(200,200,200,0.7);
+      line-height: 1.65;
+      max-width: 480px;
+      margin-bottom: 28px;
     }
 
     .hero-btns {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       flex-wrap: wrap;
       justify-content: center;
-      margin-bottom: 48px;
+      margin-bottom: 28px;
+    }
+    .hero-btns .btn { border-radius: 100px; }
+
+    /* 2×2 bullet grid */
+    .hero-bullets {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .hero-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: rgba(220,220,220,0.8);
+      line-height: 1.45;
+      padding: 14px 16px;
+      border-right: 1px solid rgba(255,255,255,0.09);
+      border-bottom: 1px solid rgba(255,255,255,0.09);
+    }
+    .hero-bullets li:nth-child(2n) { border-right: none; }
+    .hero-bullets li:nth-child(3),
+    .hero-bullets li:nth-child(4) { border-bottom: none; }
+    .hero-bullets li::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--orange);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
     }
 
-    /* Stats bar */
-    .hero-stats {
-      display: flex;
-      width: 100%;
-      max-width: 480px;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 14px;
-      overflow: hidden;
-      background: rgba(15,15,15,0.65);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-    }
-    .stat-card {
-      flex: 1;
-      padding: 18px 12px;
-      text-align: center;
-      border-right: 1px solid rgba(255,255,255,0.08);
-    }
-    .stat-card:last-child { border-right: none; }
+    /* Stats — kept below hero on scroll, not inside hero */
     .stat-value {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 28px;
@@ -330,7 +300,6 @@
       font-size: 10px;
       color: var(--muted);
       line-height: 1.3;
-      letter-spacing: 0.03em;
     }
 
     /* ─── PROBLEMS ─── */
@@ -748,8 +717,9 @@
       .container { padding: 0 24px; }
       section { padding: 72px 0; }
       nav { padding: 16px 24px; }
-      .hero-bg-left, .hero-bg-right { width: 30%; }
-      .hero-content { padding: 110px 28px 70px; }
+      /* Hero: widen center on tablet */
+      .hero-bg-left, .hero-bg-right { width: 28%; }
+      .hero-content { width: 60%; }
       .problems-grid, .services-grid { grid-template-columns: 1fr; }
       .forwhom-grid { grid-template-columns: 1fr; }
       .package-wrap { grid-template-columns: 1fr; }
@@ -757,13 +727,21 @@
       .steps-grid { grid-template-columns: repeat(2, 1fr); }
       .steps-grid::before { display: none; }
     }
-    @media (max-width: 520px) {
-      .hero-bg-left { width: 55%; opacity: 0.35; }
+    @media (max-width: 600px) {
+      /* Hero mobile: full-width center, photos hidden */
+      .hero-bg-left { width: 100%; height: 100%; opacity: 0.18; }
       .hero-bg-right { display: none; }
-      .hero-content { padding: 90px 20px 56px; }
-      .steps-grid { grid-template-columns: 1fr; }
+      .hero-content {
+        width: 92%;
+        left: 50%; top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .hero-bullets { grid-template-columns: 1fr; }
+      .hero-bullets li:nth-child(2n) { border-right: none; }
+      .hero-bullets li:nth-child(3) { border-bottom: 1px solid rgba(255,255,255,0.09); }
       .hero-btns { flex-direction: column; }
-      .btn { width: 100%; justify-content: center; }
+      .hero-btns .btn { width: 100%; justify-content: center; }
+      .steps-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -777,7 +755,7 @@
 
 <!-- HERO -->
 <section id="hero">
-  <img class="hero-bg-left" src="robot.jpg" alt="" />
+  <img class="hero-bg-left"  src="robot.jpg" alt="" />
   <img class="hero-bg-right" src="photo.jpg" alt="" />
   <div class="hero-content">
     <div class="hero-eyebrow">
@@ -792,12 +770,6 @@
       Выстраиваю системы роста в соцсетях с помощью AI-инструментов,
       чат-ботов и контент-стратегий. Без воды — только измеримые результаты.
     </p>
-    <ul class="hero-bullets">
-      <li>Аудитория, которая покупает, а не просто смотрит</li>
-      <li>Контент, который генерируется быстро и без выгорания</li>
-      <li>Чат-боты и автоматизация вместо ручной переписки</li>
-      <li>Защита аккаунта и стратегия под твою нишу</li>
-    </ul>
     <div class="hero-btns">
       <a href="https://t.me/m/8mtf5rZ2N2Ni" class="btn btn-primary" target="_blank" rel="noopener">
         Начать работу →
@@ -806,20 +778,12 @@
         Услуги и цены
       </a>
     </div>
-    <div class="hero-stats">
-      <div class="stat-card">
-        <div class="stat-value">200+</div>
-        <div class="stat-label">проектов реализовано</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value">5 лет</div>
-        <div class="stat-label">в digital и соцсетях</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value">×3</div>
-        <div class="stat-label">средний рост охватов</div>
-      </div>
-    </div>
+    <ul class="hero-bullets">
+      <li>Аудитория, которая покупает, а не просто смотрит</li>
+      <li>Контент быстро и без выгорания</li>
+      <li>Чат-боты и автоматизация</li>
+      <li>Защита аккаунта и стратегия</li>
+    </ul>
   </div>
 </section>
 
