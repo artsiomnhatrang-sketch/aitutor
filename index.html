@@ -178,13 +178,13 @@
       top: 50%;
       transform: translate(-50%, -50%);
       width: 42%;
+      max-width: 520px;
       padding: 20px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       z-index: 2;
-      max-height: 100vh;
       overflow: visible;
     }
 
@@ -201,7 +201,7 @@
       font-weight: 500;
       letter-spacing: 0.07em;
       color: var(--orange);
-      margin-bottom: 20px;
+      margin-bottom: 12px;
     }
     .hero-eyebrow .dot {
       width: 6px; height: 6px;
@@ -222,38 +222,37 @@
       color: var(--muted);
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .hero-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(1.8rem, 3.5vw, 3rem);
-      font-weight: 400;
-      line-height: 1;
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.12;
       color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
     }
     .hero-title .accent { color: var(--orange); }
 
     .hero-subtitle {
       font-family: 'Inter', sans-serif;
-      font-size: 16px;
+      font-size: 15px;
       color: rgba(200,200,200,0.7);
-      line-height: 1.65;
-      max-width: 480px;
-      margin-bottom: 28px;
+      line-height: 1.6;
+      max-width: 420px;
+      margin-bottom: 20px;
     }
 
     .hero-btns {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
       justify-content: center;
-      margin-bottom: 28px;
+      margin-bottom: 20px;
     }
-    .hero-btns .btn { border-radius: 100px; }
+    .hero-btns .btn { border-radius: 100px; padding: 11px 24px; font-size: 14px; }
 
     /* 2×2 bullet grid */
     .hero-bullets {
@@ -270,10 +269,10 @@
       align-items: flex-start;
       gap: 9px;
       font-family: 'Inter', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       color: rgba(220,220,220,0.8);
-      line-height: 1.45;
-      padding: 14px 16px;
+      line-height: 1.4;
+      padding: 10px 13px;
       border-right: 1px solid rgba(255,255,255,0.09);
       border-bottom: 1px solid rgba(255,255,255,0.09);
     }
