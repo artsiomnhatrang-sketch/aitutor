@@ -130,24 +130,72 @@
 
     /* ─── HERO ─── */
     #hero {
-      padding-top: 140px;
-      padding-bottom: 100px;
       position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
+      padding: 0;
     }
+
+    /* Full-height side photos */
+    .hero-bg-left,
+    .hero-bg-right {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 42%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      display: block;
+    }
+    .hero-bg-left {
+      left: 0;
+      object-position: right center;
+      -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+      mask-image: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+    }
+    .hero-bg-right {
+      right: 0;
+      object-position: left center;
+      transform: scaleX(-1);
+      opacity: 0.35;
+      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+      mask-image: linear-gradient(to left, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+    }
+
+    /* Dark center vignette so text stays readable */
     #hero::before {
       content: '';
       position: absolute;
-      top: -200px; right: -200px;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(244,103,42,0.1) 0%, transparent 70%);
+      inset: 0;
+      background: radial-gradient(ellipse 60% 100% at 50% 50%,
+        rgba(15,15,15,0.72) 0%,
+        rgba(15,15,15,0.10) 100%);
+      z-index: 1;
       pointer-events: none;
     }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 60px;
-      align-items: center;
+
+    /* Orange glow */
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 400px;
+      background: radial-gradient(ellipse, rgba(244,103,42,0.18) 0%, transparent 70%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Centered text block */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 720px;
+      padding: 120px 40px 80px;
     }
     .hero-eyebrow {
       display: inline-flex;
@@ -174,35 +222,39 @@
     }
     .hero-name {
       font-family: 'Unbounded', sans-serif;
-      font-size: clamp(14px, 1.5vw, 18px);
+      font-size: clamp(13px, 1.3vw, 16px);
       font-weight: 400;
       color: var(--muted);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
     .hero-title {
       font-family: 'Unbounded', sans-serif;
-      font-size: clamp(32px, 5vw, 62px);
+      font-size: clamp(34px, 5.5vw, 68px);
       font-weight: 900;
-      line-height: 1.08;
+      line-height: 1.05;
       color: #fff;
       margin-bottom: 24px;
+      text-shadow: 0 2px 40px rgba(0,0,0,0.6);
     }
     .hero-title .accent { color: var(--orange); }
     .hero-subtitle {
       font-size: 17px;
-      color: var(--muted);
+      color: rgba(232,232,232,0.75);
       line-height: 1.7;
       margin-bottom: 36px;
-      max-width: 520px;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .hero-bullets {
       list-style: none;
       margin-bottom: 44px;
-      display: flex;
+      display: inline-flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
+      text-align: left;
     }
     .hero-bullets li {
       display: flex;
@@ -216,61 +268,36 @@
       color: var(--orange);
       font-weight: 700;
       flex-shrink: 0;
-      margin-top: 1px;
     }
-    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
-
-    /* Hero photo */
-    .hero-photo-wrap {
+    .hero-btns {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 32px;
-    }
-    .hero-photo {
-      width: 100%;
-      max-width: 380px;
-      aspect-ratio: 3/4;
-      border-radius: 16px;
-      border: 2px solid var(--orange-border);
-      overflow: hidden;
-      position: relative;
-      background: var(--bg3);
-    }
-    .hero-photo img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .hero-photo-placeholder {
-      width: 100%; height: 100%;
-      display: flex;
-      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
       justify-content: center;
-      font-family: 'Unbounded', sans-serif;
-      font-size: 72px;
-      font-weight: 900;
-      color: var(--orange);
-      background: linear-gradient(135deg, #1c1c1c 0%, #242424 100%);
-      letter-spacing: -2px;
+      margin-bottom: 52px;
     }
+
+    /* Stats row */
     .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      width: 100%;
-      max-width: 380px;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(15,15,15,0.6);
+      backdrop-filter: blur(12px);
     }
     .stat-card {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px 12px;
+      flex: 1;
+      padding: 20px 16px;
       text-align: center;
+      border-right: 1px solid var(--border);
     }
+    .stat-card:last-child { border-right: none; }
     .stat-value {
       font-family: 'Unbounded', sans-serif;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 700;
       color: var(--orange);
       line-height: 1;
@@ -697,9 +724,8 @@
       .container { padding: 0 24px; }
       section { padding: 72px 0; }
       nav { padding: 16px 24px; }
-      .hero-grid { grid-template-columns: 1fr; }
-      .hero-photo-wrap { order: -1; }
-      .hero-photo { max-width: 280px; aspect-ratio: 1; }
+      .hero-bg-left, .hero-bg-right { width: 35%; }
+      .hero-content { padding: 100px 24px 60px; }
       .problems-grid, .services-grid { grid-template-columns: 1fr; }
       .forwhom-grid { grid-template-columns: 1fr; }
       .package-wrap { grid-template-columns: 1fr; }
@@ -708,7 +734,10 @@
       .steps-grid::before { display: none; }
     }
     @media (max-width: 520px) {
-      .hero-stats { grid-template-columns: repeat(3,1fr); gap:8px; }
+      .hero-bg-left { width: 50%; opacity: 0.5; }
+      .hero-bg-right { display: none; }
+      .hero-content { padding: 90px 20px 48px; }
+      .hero-stats { flex-direction: row; }
       .steps-grid { grid-template-columns: 1fr; }
       .hero-btns { flex-direction: column; }
       .btn { width: 100%; justify-content: center; }
@@ -725,56 +754,47 @@
 
 <!-- HERO -->
 <section id="hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="hero-left">
-        <div class="hero-eyebrow">
-          <span class="dot"></span>
-          AI-стратег · Эксперт по соцсетям
-        </div>
-        <p class="hero-name">Артём Бахрамов</p>
-        <h1 class="hero-title">
-          Твои соцсети<br>начнут <span class="accent">работать<br>на тебя</span>
-        </h1>
-        <p class="hero-subtitle">
-          Выстраиваю системы роста в соцсетях с помощью AI-инструментов,
-          чат-ботов и контент-стратегий. Без воды — только измеримые результаты.
-        </p>
-        <ul class="hero-bullets">
-          <li>Аудитория, которая покупает, а не просто смотрит</li>
-          <li>Контент, который генерируется быстро и без выгорания</li>
-          <li>Чат-боты и автоматизация вместо ручной переписки</li>
-          <li>Защита аккаунта и стратегия под твою нишу</li>
-        </ul>
-        <div class="hero-btns">
-          <a href="https://t.me/m/8mtf5rZ2N2Ni" class="btn btn-primary" target="_blank" rel="noopener">
-            Начать работу →
-          </a>
-          <a href="#services" class="btn btn-outline">
-            Услуги и цены
-          </a>
-        </div>
+  <img class="hero-bg-left" src="photo.jpg" alt="" />
+  <img class="hero-bg-right" src="photo.jpg" alt="" />
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      AI-стратег · Эксперт по соцсетям
+    </div>
+    <p class="hero-name">Артём Бахрамов</p>
+    <h1 class="hero-title">
+      Твои соцсети начнут<br><span class="accent">работать на тебя</span>
+    </h1>
+    <p class="hero-subtitle">
+      Выстраиваю системы роста в соцсетях с помощью AI-инструментов,
+      чат-ботов и контент-стратегий. Без воды — только измеримые результаты.
+    </p>
+    <ul class="hero-bullets">
+      <li>Аудитория, которая покупает, а не просто смотрит</li>
+      <li>Контент, который генерируется быстро и без выгорания</li>
+      <li>Чат-боты и автоматизация вместо ручной переписки</li>
+      <li>Защита аккаунта и стратегия под твою нишу</li>
+    </ul>
+    <div class="hero-btns">
+      <a href="https://t.me/m/8mtf5rZ2N2Ni" class="btn btn-primary" target="_blank" rel="noopener">
+        Начать работу →
+      </a>
+      <a href="#services" class="btn btn-outline">
+        Услуги и цены
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-value">200+</div>
+        <div class="stat-label">проектов реализовано</div>
       </div>
-      <div class="hero-photo-wrap">
-        <div class="hero-photo">
-          <img src="photo.jpg" alt="Артём Бахрамов"
-               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <div class="hero-photo-placeholder" style="display:none;">АБ</div>
-        </div>
-        <div class="hero-stats">
-          <div class="stat-card">
-            <div class="stat-value">200+</div>
-            <div class="stat-label">проектов реализовано</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value">5 лет</div>
-            <div class="stat-label">в digital и соцсетях</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value">×3</div>
-            <div class="stat-label">средний рост охватов</div>
-          </div>
-        </div>
+      <div class="stat-card">
+        <div class="stat-value">5 лет</div>
+        <div class="stat-label">в digital и соцсетях</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">×3</div>
+        <div class="stat-label">средний рост охватов</div>
       </div>
     </div>
   </div>
