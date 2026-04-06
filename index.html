@@ -307,71 +307,152 @@
 
     /* ─── CASE ─── */
     #case { background: var(--bg2); }
-    .case-inner {
+    .case-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .cases-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
+      gap: 24px;
     }
-    .case-left .section-label { margin-bottom: 12px; }
-    .case-left h2 { margin-bottom: 16px; }
-    .case-meta {
+    .case-card {
+      background: var(--bg);
+      border: 1px solid var(--orange-border);
+      border-radius: 16px;
+      padding: 32px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      margin-bottom: 28px;
+      gap: 24px;
+      transition: box-shadow .25s, transform .25s;
     }
-    .case-meta-item {
+    .case-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(244,103,42,0.12);
+    }
+    .case-card-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .case-avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .case-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .case-card-name {
+      font-family: 'Unbounded', sans-serif;
       font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+    .case-card-niche {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    /* Before → After row */
+    .case-before-after {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg2);
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+    .case-ba-block { flex: 1; }
+    .case-ba-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .case-ba-label.before { color: var(--muted); }
+    .case-ba-label.after  { color: var(--orange); }
+    .case-ba-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 34px;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+    .case-ba-value.before { color: #555; }
+    .case-ba-value.after  { color: var(--orange); }
+    .case-ba-arrow {
+      font-size: 22px;
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+    /* Extra metrics row */
+    .case-metrics {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .case-metric-tag {
+      background: var(--orange-dim);
+      border: 1px solid var(--orange-border);
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: var(--orange);
+      font-weight: 500;
+    }
+    /* Tools row */
+    .case-tools {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .case-tool {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .case-timing {
+      font-size: 12px;
       color: var(--muted);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
-    .case-meta-item::before {
-      content: '●';
-      color: var(--orange);
-      font-size: 7px;
+    .case-timing::before {
+      content: '⏱';
+      font-size: 13px;
+    }
+    .case-card-footer {
+      margin-top: auto;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
     }
     .case-link {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       color: var(--orange);
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 600;
       text-decoration: none;
-      border-bottom: 1px solid var(--orange-border);
-      padding-bottom: 2px;
-      transition: border-color .2s, opacity .2s;
+      transition: opacity .2s;
     }
-    .case-link:hover { opacity: .8; border-color: var(--orange); }
-    .case-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .case-stat {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px 20px;
-      transition: border-color .2s;
-    }
-    .case-stat:hover { border-color: var(--orange-border); }
-    .case-stat-value {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 36px;
-      color: var(--orange);
-      line-height: 1;
-      margin-bottom: 6px;
-      letter-spacing: 0.02em;
-    }
-    .case-stat-label {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.4;
-    }
+    .case-link:hover { opacity: .75; }
 
     /* ─── PROBLEMS ─── */
     #problems { background: var(--bg2); }
@@ -822,7 +903,7 @@
       /* Hero: widen center on tablet */
       .hero-bg-left, .hero-bg-right { width: 28%; }
       .hero-content { width: 60%; }
-      .case-inner, .problems-grid, .services-grid { grid-template-columns: 1fr; }
+      .cases-grid, .problems-grid, .services-grid { grid-template-columns: 1fr; }
       .forwhom-grid { grid-template-columns: 1fr; }
       .package-wrap { grid-template-columns: 1fr; }
       .package-card { position: static; }
@@ -892,37 +973,91 @@
 <!-- CASE -->
 <section id="case">
   <div class="container">
-    <div class="case-inner">
-      <div class="case-left">
-        <div class="section-label">Реальный результат клиента</div>
-        <h2>Архитектура и строительство — <span class="accent">+7000 подписчиков за 7 дней</span></h2>
-        <div class="case-meta">
-          <div class="case-meta-item">Ниша: архитектура / строительство</div>
-          <div class="case-meta-item">Старт: 212 000 подписчиков</div>
-          <div class="case-meta-item">Без таргетированной рекламы</div>
+    <div class="case-header">
+      <div class="section-label" style="justify-content:center;">Кейсы</div>
+      <h2>Реальные результаты <span class="accent">реальных клиентов</span></h2>
+    </div>
+    <div class="cases-grid">
+
+      <!-- Кейс 1 -->
+      <div class="case-card">
+        <div class="case-card-top">
+          <div class="case-avatar">АС</div>
+          <div>
+            <div class="case-card-name">Архитектурная студия</div>
+            <div class="case-card-niche">Архитектура и строительство</div>
+          </div>
         </div>
-        <a href="https://t.me/bahramovartem" class="case-link" target="_blank" rel="noopener">
-          Смотреть портфолио →
-        </a>
+        <div class="case-before-after">
+          <div class="case-ba-block">
+            <div class="case-ba-label before">До</div>
+            <div class="case-ba-value before">212 000</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;">подписчиков</div>
+          </div>
+          <div class="case-ba-arrow">→</div>
+          <div class="case-ba-block">
+            <div class="case-ba-label after">После</div>
+            <div class="case-ba-value after">219 000</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;">подписчиков</div>
+          </div>
+        </div>
+        <div class="case-metrics">
+          <span class="case-metric-tag">+400% охваты</span>
+          <span class="case-metric-tag">+70% вовлечённость</span>
+          <span class="case-metric-tag">без таргета</span>
+        </div>
+        <div class="case-tools">
+          <span class="case-tool">Геймификация</span>
+          <span class="case-tool">AI-автоматизация</span>
+          <span class="case-tool">Reels-воронка</span>
+        </div>
+        <div class="case-timing">7 дней до результата</div>
+        <div class="case-card-footer">
+          <a href="https://t.me/bahramovartem" class="case-link" target="_blank" rel="noopener">
+            Смотреть портфолио →
+          </a>
+        </div>
       </div>
-      <div class="case-stats">
-        <div class="case-stat">
-          <div class="case-stat-value">+7 000</div>
-          <div class="case-stat-label">новых подписчиков за 7 дней без таргета</div>
+
+      <!-- Кейс 2 -->
+      <div class="case-card">
+        <div class="case-card-top">
+          <div class="case-avatar">АП</div>
+          <div>
+            <div class="case-card-name">@a.platonovva</div>
+            <div class="case-card-niche">Таролог / эзотерика</div>
+          </div>
         </div>
-        <div class="case-stat">
-          <div class="case-stat-value">+400%</div>
-          <div class="case-stat-label">рост охватов за неделю</div>
+        <div class="case-before-after">
+          <div class="case-ba-block">
+            <div class="case-ba-label before">До</div>
+            <div class="case-ba-value before">300</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;">подписчиков</div>
+          </div>
+          <div class="case-ba-arrow">→</div>
+          <div class="case-ba-block">
+            <div class="case-ba-label after">После</div>
+            <div class="case-ba-value after">146 000</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;">подписчиков</div>
+          </div>
         </div>
-        <div class="case-stat">
-          <div class="case-stat-value">+70%</div>
-          <div class="case-stat-label">рост вовлечённости аудитории</div>
+        <div class="case-metrics">
+          <span class="case-metric-tag">×487 рост</span>
+          <span class="case-metric-tag">с 300 до 146K</span>
         </div>
-        <div class="case-stat">
-          <div class="case-stat-value">7 дней</div>
-          <div class="case-stat-label">до первых измеримых результатов</div>
+        <div class="case-tools">
+          <span class="case-tool">Контент-стратегия</span>
+          <span class="case-tool">AI-контент</span>
+          <span class="case-tool">Воронка продаж</span>
+        </div>
+        <div class="case-timing">Подтверждённый результат</div>
+        <div class="case-card-footer">
+          <a href="https://www.instagram.com/a.platonovva/" class="case-link" target="_blank" rel="noopener">
+            Смотреть аккаунт →
+          </a>
         </div>
       </div>
+
     </div>
   </div>
 </section>
