@@ -305,6 +305,74 @@
       line-height: 1.3;
     }
 
+    /* ─── CASE ─── */
+    #case { background: var(--bg2); }
+    .case-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .case-left .section-label { margin-bottom: 12px; }
+    .case-left h2 { margin-bottom: 16px; }
+    .case-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 28px;
+    }
+    .case-meta-item {
+      font-size: 14px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .case-meta-item::before {
+      content: '●';
+      color: var(--orange);
+      font-size: 7px;
+    }
+    .case-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--orange);
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid var(--orange-border);
+      padding-bottom: 2px;
+      transition: border-color .2s, opacity .2s;
+    }
+    .case-link:hover { opacity: .8; border-color: var(--orange); }
+    .case-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .case-stat {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 20px;
+      transition: border-color .2s;
+    }
+    .case-stat:hover { border-color: var(--orange-border); }
+    .case-stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+    .case-stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
     /* ─── PROBLEMS ─── */
     #problems { background: var(--bg2); }
     .problems-intro {
@@ -498,6 +566,31 @@
       font-size: 7px;
       flex-shrink: 0;
       margin-top: 5px;
+    }
+    /* Price tag inside service card */
+    .service-price {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin: 12px 0 16px;
+    }
+    .service-price-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      color: var(--orange);
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+    .service-price-note {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .service-tagline {
+      font-size: 13px;
+      color: rgba(232,232,232,0.55);
+      font-style: italic;
+      margin-bottom: 20px;
+      line-height: 1.4;
     }
 
     /* ─── PACKAGE ─── */
@@ -723,7 +816,7 @@
       /* Hero: widen center on tablet */
       .hero-bg-left, .hero-bg-right { width: 28%; }
       .hero-content { width: 60%; }
-      .problems-grid, .services-grid { grid-template-columns: 1fr; }
+      .case-inner, .problems-grid, .services-grid { grid-template-columns: 1fr; }
       .forwhom-grid { grid-template-columns: 1fr; }
       .package-wrap { grid-template-columns: 1fr; }
       .package-card { position: static; }
@@ -753,7 +846,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">А<span>.</span>Бахрамов</div>
-  <a href="https://t.me/m/8mtf5rZ2N2Ni" class="nav-cta" target="_blank" rel="noopener">Написать в Telegram →</a>
+  <a href="https://t.me/m/8mtf5rZ2N2Ni" class="nav-cta" target="_blank" rel="noopener">Получить бесплатный аудит →</a>
 </nav>
 
 <!-- HERO -->
@@ -767,7 +860,7 @@
     </div>
     <p class="hero-name">Артём Бахрамов</p>
     <h1 class="hero-title">
-      Твои соцсети начнут<br><span class="accent">работать на тебя</span>
+      Настрою систему которая приносит<br><span class="accent">10-30 заявок в месяц</span><br>из соцсетей
     </h1>
     <p class="hero-subtitle">
       Выстраиваю системы роста в соцсетях с помощью AI-инструментов,
@@ -775,7 +868,7 @@
     </p>
     <div class="hero-btns">
       <a href="https://t.me/m/8mtf5rZ2N2Ni" class="btn btn-primary" target="_blank" rel="noopener">
-        Начать работу →
+        Получить бесплатный аудит →
       </a>
       <a href="#services" class="btn btn-outline">
         Услуги и цены
@@ -790,117 +883,38 @@
   </div>
 </section>
 
-<!-- PROBLEMS -->
-<section id="problems">
+<!-- CASE -->
+<section id="case">
   <div class="container">
-    <div class="problems-intro">
-      <div class="section-label">Проблема</div>
-      <h2>Почему соцсети <span class="accent">не работают</span></h2>
-      <p style="color:var(--muted); font-size:16px;">Большинство людей делают одни и те же ошибки, теряя время и деньги</p>
-    </div>
-    <div class="problems-grid">
-      <div class="problem-card">
-        <div class="problem-num">01</div>
-        <h3>Нет системы — есть хаос</h3>
-        <p>Посты выходят хаотично, без стратегии и понимания кому и зачем. Аудитория не знает, что вы продаёте и почему должна купить именно у вас.</p>
-      </div>
-      <div class="problem-card">
-        <div class="problem-num">02</div>
-        <h3>Контент съедает всё время</h3>
-        <p>Часы на один пост, постоянное выгорание, нет идей. При этом результат нулевой — алгоритмы не продвигают, охваты падают.</p>
-      </div>
-      <div class="problem-card">
-        <div class="problem-num">03</div>
-        <h3>Аккаунт в зоне риска</h3>
-        <p>Не подключён 2FA, один аккаунт без резервов, нет понимания как работает блокировка. Одна жалоба — и годами наработанная аудитория исчезает.</p>
-      </div>
-      <div class="problem-card">
-        <div class="problem-num">04</div>
-        <h3>Заявки не приходят из соцсетей</h3>
-        <p>Подписчики есть, но продаж нет. Нет воронки, нет автоматизации, нет чёткого пути от «увидел пост» до «оплатил». Всё держится на ручной переписке.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOR WHOM -->
-<section id="forwhom">
-  <div class="container">
-    <div class="forwhom-header">
-      <div class="section-label">Для кого</div>
-      <h2>Узнай себя и <span class="accent">увидь результат</span></h2>
-    </div>
-    <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('expert', this)">Эксперт / Специалист</button>
-      <button class="tab-btn" onclick="switchTab('business', this)">Бизнес</button>
-      <button class="tab-btn" onclick="switchTab('freelancer', this)">Фрилансер</button>
-    </div>
-
-    <div id="tab-expert" class="tab-pane active">
-      <div class="forwhom-grid">
-        <div class="forwhom-block now">
-          <div class="block-label now-label">● Сейчас</div>
-          <ul>
-            <li>Ведёшь соцсети «когда есть время»</li>
-            <li>Много подписчиков, но мало заявок</li>
-            <li>Сам пишешь все посты — сгораешь</li>
-            <li>Не понимаешь как монетизировать аудиторию</li>
-          </ul>
+    <div class="case-inner">
+      <div class="case-left">
+        <div class="section-label">Реальный результат клиента</div>
+        <h2>Архитектура и строительство — <span class="accent">+7000 подписчиков за 7 дней</span></h2>
+        <div class="case-meta">
+          <div class="case-meta-item">Ниша: архитектура / строительство</div>
+          <div class="case-meta-item">Старт: 212 000 подписчиков</div>
+          <div class="case-meta-item">Без таргетированной рекламы</div>
         </div>
-        <div class="forwhom-block after">
-          <div class="block-label after-label">→ После работы со мной</div>
-          <ul>
-            <li>Контент-машина работает без тебя</li>
-            <li>Каждый пост — часть воронки продаж</li>
-            <li>AI генерирует идеи и черновики за минуты</li>
-            <li>Стабильный поток клиентов из соцсетей</li>
-          </ul>
-        </div>
+        <a href="https://t.me/bahramovartem" class="case-link" target="_blank" rel="noopener">
+          Смотреть портфолио →
+        </a>
       </div>
-    </div>
-
-    <div id="tab-business" class="tab-pane">
-      <div class="forwhom-grid">
-        <div class="forwhom-block now">
-          <div class="block-label now-label">● Сейчас</div>
-          <ul>
-            <li>Платишь SMM-щику, результата не видно</li>
-            <li>Соцсети — расходы, а не источник клиентов</li>
-            <li>Нет понимания что работает, а что нет</li>
-            <li>Конкуренты растут быстрее</li>
-          </ul>
+      <div class="case-stats">
+        <div class="case-stat">
+          <div class="case-stat-value">+7 000</div>
+          <div class="case-stat-label">новых подписчиков за 7 дней без таргета</div>
         </div>
-        <div class="forwhom-block after">
-          <div class="block-label after-label">→ После работы со мной</div>
-          <ul>
-            <li>Соцсети приносят измеримый доход</li>
-            <li>Чёткая стратегия с метриками и KPI</li>
-            <li>Автоматизированная воронка продаж</li>
-            <li>Масштабирование без пропорционального роста расходов</li>
-          </ul>
+        <div class="case-stat">
+          <div class="case-stat-value">+400%</div>
+          <div class="case-stat-label">рост охватов за неделю</div>
         </div>
-      </div>
-    </div>
-
-    <div id="tab-freelancer" class="tab-pane">
-      <div class="forwhom-grid">
-        <div class="forwhom-block now">
-          <div class="block-label now-label">● Сейчас</div>
-          <ul>
-            <li>Берёшь всё подряд, чтобы не было простоев</li>
-            <li>Ищешь клиентов сам — через знакомых или биржи</li>
-            <li>Не умеешь упаковать экспертизу в продукт</li>
-            <li>Доход нестабильный, сложно поднять чек</li>
-          </ul>
+        <div class="case-stat">
+          <div class="case-stat-value">+70%</div>
+          <div class="case-stat-label">рост вовлечённости аудитории</div>
         </div>
-        <div class="forwhom-block after">
-          <div class="block-label after-label">→ После работы со мной</div>
-          <ul>
-            <li>Личный бренд привлекает клиентов сам</li>
-            <li>Продающий профиль с очередью на консультации</li>
-            <li>Понятный продуктовый ряд с разными чеками</li>
-            <li>Стабильный доход без постоянного поиска</li>
-          </ul>
+        <div class="case-stat">
+          <div class="case-stat-value">7 дней</div>
+          <div class="case-stat-label">до первых измеримых результатов</div>
         </div>
       </div>
     </div>
@@ -912,52 +926,65 @@
   <div class="container">
     <div class="services-header">
       <div class="section-label">Услуги</div>
-      <h2>Что я делаю <span class="accent">конкретно</span></h2>
-      <p style="color:var(--muted);font-size:16px;margin-top:12px;">Каждое направление — это системная работа с измеримым результатом</p>
+      <h2>Выбери <span class="accent">свою задачу</span></h2>
+      <p style="color:var(--muted);font-size:16px;margin-top:12px;">Точечное решение или система под ключ — под любой запрос</p>
     </div>
     <div class="services-grid">
       <div class="service-card">
-        <div class="service-icon">🔒</div>
-        <h3>Безопасность аккаунта</h3>
+        <div class="service-icon">⚙️</div>
+        <h3>Пакет СИСТЕМА</h3>
+        <div class="service-price">
+          <span class="service-price-value">39 900 ₽</span>
+        </div>
+        <p class="service-tagline">Всё под ключ. Окупается с первых 2-3 клиентов</p>
         <ul>
-          <li>Аудит уязвимостей профиля и настройка 2FA</li>
-          <li>Создание резервных аккаунтов и страховочной сети</li>
-          <li>Разработка стратегии защиты от банов и жалоб</li>
-          <li>Инструкции по безопасной работе с рекламой</li>
-          <li>Настройка уведомлений и мониторинг активности</li>
+          <li>Аудит аккаунта и стратегическая сессия</li>
+          <li>Контент-стратегия на 3 месяца</li>
+          <li>AI-ассистент под твой голос</li>
+          <li>Чат-бот с воронкой продаж</li>
+          <li>Сопровождение 30 дней</li>
         </ul>
       </div>
       <div class="service-card">
-        <div class="service-icon">📈</div>
-        <h3>Трафик и продажи</h3>
+        <div class="service-icon">🔓</div>
+        <h3>Разблокировка аккаунта</h3>
+        <div class="service-price">
+          <span class="service-price-value">от 10 000 ₽</span>
+        </div>
+        <p class="service-tagline">Instagram и Telegram — возврат взломанных аккаунтов</p>
         <ul>
-          <li>Анализ конкурентов и разработка контент-стратегии</li>
-          <li>Воронки продаж внутри соцсетей</li>
-          <li>Настройка таргетированной рекламы и коллабы</li>
-          <li>Оптимизация профиля под поиск и алгоритмы</li>
-          <li>Построение реферальных систем и амбассадоров</li>
+          <li>Разблокировка забаненных аккаунтов</li>
+          <li>Возврат взломанного профиля</li>
+          <li>Защита и настройка 2FA после восстановления</li>
+          <li>Резервная система на случай повтора</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🧹</div>
+        <h3>Чистка от ботов</h3>
+        <div class="service-price">
+          <span class="service-price-value">16 000 ₽</span>
+        </div>
+        <p class="service-tagline">Безопасная очистка — охваты растут, алгоритмы довольны</p>
+        <ul>
+          <li>Аудит подписчиков и выявление ботов</li>
+          <li>Поэтапная безопасная очистка</li>
+          <li>Повышение показателя вовлечённости</li>
+          <li>Рост органических охватов после чистки</li>
         </ul>
       </div>
       <div class="service-card">
         <div class="service-icon">🤖</div>
-        <h3>AI-контент</h3>
+        <h3>AI-агент под ключ</h3>
+        <div class="service-price">
+          <span class="service-price-value">от 30 000 ₽</span>
+        </div>
+        <p class="service-tagline">Чат-бот который продаёт 24/7 пока ты спишь</p>
         <ul>
-          <li>Настройка персонального AI-ассистента под твой голос</li>
-          <li>Контент-планирование и генерация идей через AI</li>
-          <li>Автоматизация создания постов, Reels, сторис</li>
-          <li>AI-шаблоны для быстрого написания текстов</li>
-          <li>Обучение работе с ChatGPT, Claude, Midjourney</li>
-        </ul>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">⚡</div>
-        <h3>Чат-боты и автоматизация</h3>
-        <ul>
-          <li>Разработка чат-ботов в Telegram и Instagram</li>
-          <li>Автоворонки с сегментацией и персонализацией</li>
-          <li>Автоответы на комментарии и директ</li>
-          <li>Интеграция с CRM, платёжными системами</li>
-          <li>Аналитика и A/B тестирование сообщений</li>
+          <li>Разработка AI-агента под твою нишу</li>
+          <li>Автоворонка с квалификацией лидов</li>
+          <li>Интеграция с Telegram, Instagram</li>
+          <li>Подключение к CRM и оплатам</li>
         </ul>
       </div>
     </div>
@@ -1014,7 +1041,7 @@
           <div class="price-value"><span>39 900</span> ₽</div>
           <p class="price-sub">Единоразовый платёж · без скрытых комиссий</p>
           <a href="https://t.me/m/8mtf5rZ2N2Ni" class="btn btn-primary" target="_blank" rel="noopener">
-            Хочу этот пакет →
+            Получить бесплатный аудит →
           </a>
           <a href="https://t.me/m/8mtf5rZ2N2Ni" class="btn btn-outline" target="_blank" rel="noopener">
             Задать вопрос
@@ -1036,47 +1063,15 @@
   </div>
 </section>
 
-<!-- STEPS -->
-<section id="steps">
-  <div class="container">
-    <div class="steps-header">
-      <div class="section-label" style="justify-content:center;">Как работаем</div>
-      <h2>4 шага от заявки до <span class="accent">результата</span></h2>
-    </div>
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-circle">1</div>
-        <h3>Диагностика</h3>
-        <p>Разбираем твою ситуацию, нишу, цели и текущие соцсети. Определяем точку А и точку Б.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-circle">2</div>
-        <h3>Стратегия</h3>
-        <p>Создаём персональный план: контент, защита, автоматизация, воронка. Всё под твою задачу.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-circle">3</div>
-        <h3>Внедрение</h3>
-        <p>Настраиваем инструменты, чат-боты, AI-ассистента. Запускаем систему и тестируем.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-circle">4</div>
-        <h3>Результат</h3>
-        <p>Сопровождение, анализ метрик, корректировки. Выходим на стабильный поток заявок.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CTA -->
 <section id="cta">
   <div class="container">
     <div class="cta-inner">
       <div class="section-label" style="justify-content:center;">Начать</div>
       <h2>Готов превратить соцсети<br>в <span class="accent">источник дохода?</span></h2>
-      <p>Напиши мне в Telegram — разберём твою ситуацию и составим план. Первая консультация бесплатно.</p>
+      <p>Разберём твою ситуацию и составим план. Первая консультация бесплатно.</p>
       <a href="https://t.me/m/8mtf5rZ2N2Ni" class="btn btn-primary" target="_blank" rel="noopener">
-        Написать в Telegram →
+        Получить бесплатный аудит →
       </a>
     </div>
   </div>
@@ -1085,7 +1080,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="container">
-    <p>© 2024 Артём Бахрамов — AI-стратег и эксперт по соцсетям ·
+    <p>© 2026 Артём Бахрамов — AI-стратег и эксперт по соцсетям ·
       <a href="https://t.me/m/8mtf5rZ2N2Ni" target="_blank" rel="noopener">Telegram</a>
     </p>
   </div>
@@ -1109,7 +1104,7 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.problem-card, .service-card, .step-card, .pkg-item').forEach(el => {
+  document.querySelectorAll('.service-card, .case-stat, .pkg-item').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity .5s ease, transform .5s ease, border-color .2s';
